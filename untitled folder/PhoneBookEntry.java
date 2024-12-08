@@ -1,96 +1,101 @@
-
+// Exercise 1
 public class PhoneBookEntry {
 
-	private int Id = -1;
-	private String FirstName;
-	private String LastName;
-	private String Email;
-	private int ZipCode;
-	private int PhoneNumber;
+	private int id;
+	private String firstname;
+	private String lastname;
+	private String email;
+	private int zipcode;
+	private int phonenumber;
 	
 	public PhoneBookEntry() {
-		Id = -1;
-		FirstName = "";
-		LastName = "";
-		Email = "";
-		ZipCode = 0;
-		PhoneNumber = 0;
+		
+		id = -1;
+		firstname = "";
+		lastname = "";
+		email = "";
+		zipcode = -1;
+		phonenumber = -1;
 	}
 	
-	public PhoneBookEntry(int Id, String FirstName, String LastName, String Email, int ZipCode, int PhoneNumber) {
-		this.Id = Id;
-		this.FirstName = FirstName;
-		this.LastName = LastName;
-		this.Email = Email;
-		this.ZipCode = ZipCode;
-		this.PhoneNumber = PhoneNumber;
+	public PhoneBookEntry(int id1, String firstname1, String lastname1, String email1, int zipcode1, int phonenumber1) {
+		
+		id = id1;
+		firstname = firstname1;
+		lastname = lastname1;
+		email = email1;
+		zipcode = zipcode1;
+		phonenumber = phonenumber1;
+		
 	}
 	
-	public PhoneBookEntry(String FirstName, int PhoneNumber) {
-		this.FirstName = FirstName;
-		this.PhoneNumber = PhoneNumber;
+	public PhoneBookEntry(String firstname2, int phonenumber2) {
+		
+		firstname = firstname2;
+		phonenumber = phonenumber2;
 	}
 	
-	public PhoneBookEntry(String FirstName) {
-		this.FirstName = FirstName;
+	public PhoneBookEntry(String firstname3) {
+		
+		firstname = firstname3;
 	}
 	
-	public void printBookEntry() {
-		System.out.println("----------------------------------------");
-		System.out.println("ID: " + Id);
-		System.out.println("First name: " + FirstName);
-		System.out.println("Last name: " + LastName);
-		System.out.println("Email: " + Email);
-		System.out.println("Zip Code: " + ZipCode);
-		System.out.println("Phone Number: " + PhoneNumber);
-		System.out.println("----------------------------------------");
-	}
-
 	public int getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(int id) {
-		Id = id;
+		this.id = id;
 	}
 
-	public String getFirstName() {
-		return FirstName;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setFirstName(String firstName) {
-		FirstName = firstName;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getLastName() {
-		return LastName;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setLastName(String lastName) {
-		LastName = lastName;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 
-	public int getZipCode() {
-		return ZipCode;
+	public int getZipcode() {
+		return zipcode;
 	}
 
-	public void setZipCode(int zipCode) {
-		ZipCode = zipCode;
+	public void setZipcode(int zipcode) {
+		this.zipcode = zipcode;
 	}
 
-	public int getPhoneNumber() {
-		return PhoneNumber;
+	public int getPhonenumber() {
+		return phonenumber;
 	}
 
-	public void setPhoneNumber(int phoneNumber) {
-		PhoneNumber = phoneNumber;
+	public void setPhonenumber(int phonenumber) {
+		this.phonenumber = phonenumber;
 	}
+
+	public void printBookEntry() {
+			
+		System.out.println("ID: " + id);
+		System.out.println("First Name: " + firstname);
+		System.out.println("Last Name: " + lastname);
+		System.out.println("Email: " + email);
+		System.out.println("Zip Code: " + zipcode);
+		System.out.println("Phone Number: " + phonenumber);
+	}
+	
 }
