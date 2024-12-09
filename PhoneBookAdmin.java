@@ -49,37 +49,75 @@ public class PhoneBookAdmin extends User implements PhoneBookAdminInterface {
     // Overridden method to add a phone entry to the phone book directory
     @Override
     public void addPhoneEntry(PhoneBookEntry entry) {
-        phoneBookDirectory.addEntry(entry);
+    	// Adding the entry to the directory
+        if (phoneBookDirectory.addEntry(entry).equals("Successful")) {
+            
+        	System.out.println("Entry added successfully.");
+        
+        } else {
+            
+        	System.out.println("Failed to add entry. Directory might be full.");
+        }
     }
     
     // Overridden method to edit an existing phone entry
     @Override
     public void editPhoneEntry(String firstName, String lastName, Scanner input) {
-        phoneBookDirectory.Edit(firstName, lastName, input);
+    	if (phoneBookDirectory.Edit(firstName, lastName, input).equals("Edited Successfully")) {
+            
+        	System.out.println("Entry edited successfully.");
+        
+        } else {
+            
+        	System.out.println("Entry not found.");
+        }
     }
     
     // Overridden method to delete a phone entry
     @Override
     public void deletePhoneEntry(int id) {
-        phoneBookDirectory.DeleteEntry(id);
+        if (phoneBookDirectory.DeleteEntry(id).equals("Successfully Deleted")) {
+        	
+        	System.out.println("Entry Successfully Deleted");
+        }
+        
+        else {
+        	
+        	System.out.println("Entry Not Found");
+        }
     }
 
     // Overridden method to sort the phone book directory by ID
     @Override
     public void sortPhoneBookDirectory() {
         phoneBookDirectory.sortEntriesById();
+        System.out.println("PhoneBookDirectory sorted by ID.");
     }
 
     // Overridden method to search for a phone number using linear search
     @Override
     public void searchLinear(String phoneNumber) {
-        phoneBookDirectory.LinearSearchByPhoneNumber(phoneNumber);
+    	String linearSearchResult = phoneBookDirectory.LinearSearchByPhoneNumber(phoneNumber);
+        if (linearSearchResult.equals("Phone Number Found")) {
+            System.out.println("Phone number found.");
+        } else {
+            System.out.println("Phone number not found.");
+        }
     }
     
     // Overridden method to search for an entry using binary search by ID
     @Override
     public void searchBinary(int id) {
-        phoneBookDirectory.SearchbyIdBinarySearch(id);
+    	PhoneBookEntry searchResult = phoneBookDirectory.SearchbyIdBinarySearch(id);
+        if (searchResult.getId() != -1) {
+        	System.out.println();
+        	System.out.println("Entry found:");
+        	System.out.println();
+            searchResult.printBookEntry();
+        } else {
+        	System.out.println(id);
+            System.out.println("Entry not found.");
+        }
     }
     
     // Overridden method to change the password of the admin
@@ -141,15 +179,8 @@ public class PhoneBookAdmin extends User implements PhoneBookAdminInterface {
                     String phoneNumber = scanner.nextLine();
                     PhoneBookEntry entry = new PhoneBookEntry(id, firstName, lastName, email, zipCode, phoneNumber);
                     
-                    // Add the entry to the phone book
-                    if (phoneBookDirectory.addEntry(entry).equals("Successful")) {
-                        
-                    	System.out.println("Entry added successfully.");
+                    addPhoneEntry(entry);
                     
-                    } else {
-                        
-                    	System.out.println("Failed to add entry. Directory might be full.");
-                    }
                     break;
 
                 case 2:
@@ -159,14 +190,9 @@ public class PhoneBookAdmin extends User implements PhoneBookAdminInterface {
                     firstName = scanner.nextLine();
                     System.out.print("Enter Last Name of Entry to Edit: ");
                     lastName = scanner.nextLine();
-                    if (phoneBookDirectory.Edit(firstName, lastName, scanner).equals("Edited Successfully")) {
-                        
-                    	System.out.println("Entry edited successfully.");
                     
-                    } else {
-                        
-                    	System.out.println("Entry not found.");
-                    }
+                    editPhoneEntry(firstName, lastName, scanner);
+                    
                     break;
 
                 case 3:
@@ -174,14 +200,16 @@ public class PhoneBookAdmin extends User implements PhoneBookAdminInterface {
                 	// Delete a phone entry by ID
                     System.out.print("Enter ID of Entry to Delete: ");
                     id = scanner.nextInt();
-                    phoneBookDirectory.DeleteEntry(id);
+                    
+                    deletePhoneEntry(id);
+                    
                     break;
 
                 case 4:
                 	
                 	// Sort the phone book directory by ID
-                	phoneBookDirectory.sortEntriesById();
-                    System.out.println("PhoneBookDirectory sorted by ID.");
+                	sortPhoneBookDirectory();
+                	
                     break;
 
                 case 5:
@@ -189,12 +217,9 @@ public class PhoneBookAdmin extends User implements PhoneBookAdminInterface {
                 	// Search using linear search
                     System.out.print("Enter Phone Number to Search: ");
                     phoneNumber = scanner.nextLine();
-                    String linearSearchResult = phoneBookDirectory.LinearSearchByPhoneNumber(phoneNumber);
-                    if (linearSearchResult.equals("Phone Number Found")) {
-                        System.out.println("Phone number found.");
-                    } else {
-                        System.out.println("Phone number not found.");
-                    }
+                    
+                    searchLinear(phoneNumber);
+                    
                     break;
 
                 case 6:
@@ -202,19 +227,16 @@ public class PhoneBookAdmin extends User implements PhoneBookAdminInterface {
                 	// Search using binary search by ID
                     System.out.print("Enter ID to Search: ");
                     id = scanner.nextInt();
-                    PhoneBookEntry searchResult = phoneBookDirectory.SearchbyIdBinarySearch(id);
-                    if (searchResult.getId() != -1) {
-                        System.out.println("Entry found:");
-                        searchResult.printBookEntry();
-                    } else {
-                        System.out.println("Entry not found.");
-                    }
+                    
+                    searchBinary(id);
+                    
                     break;
 
                 case 7:
                 	
                 	// Print admin's information
                     printUserInfo();
+                    
                     break;
 
                 case 8:
