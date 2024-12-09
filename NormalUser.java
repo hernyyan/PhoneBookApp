@@ -29,25 +29,49 @@ public class NormalUser extends User implements NormalUserInterface {
     // Overridden method to add a phone entry to the phone book directory
     @Override
     public void addPhoneEntry(PhoneBookEntry entry) {
-    	phoneBookDirectory.addEntry(entry);
+    	// Adding the entry to the directory
+        if (phoneBookDirectory.addEntry(entry).equals("Successful")) {
+            
+        	System.out.println("Entry added successfully.");
+        
+        } else {
+            
+        	System.out.println("Failed to add entry. Directory might be full.");
+        }
     }
     
     // Overridden method to edit an existing phone entry
     @Override
     public void editPhoneEntry(String firstName, String lastName, Scanner input) {
-    	phoneBookDirectory.Edit(firstName, lastName, input);
+    	if (phoneBookDirectory.Edit(firstName, lastName, input).equals("Edited Successfully")) {
+            
+        	System.out.println("Entry edited successfully.");
+        
+        } else {
+            
+        	System.out.println("Entry not found.");
+        }
     }
     
     // Overridden method to sort the phone book directory by ID
     @Override
     public void sortPhoneBookDirectory() {
     	phoneBookDirectory.sortEntriesById();
+    	System.out.println("PhoneBookDirectory sorted by ID.");
     }
     
     // Overridden method to search for a phone number using linear search
     @Override
     public void searchLinear(String phoneNumber) {
-    	phoneBookDirectory.LinearSearchByPhoneNumber(phoneNumber);
+    	String searchResult = phoneBookDirectory.LinearSearchByPhoneNumber(phoneNumber);
+        if (searchResult.equals("Phone Number Found")) {
+            
+        	System.out.println("Phone number found.");
+        
+        } else {
+            
+        	System.out.println("Phone number not found.");
+        }
     }
     
     // Overridden method to print the user info
@@ -114,15 +138,8 @@ public class NormalUser extends User implements NormalUserInterface {
                     String phoneNumber = scanner.nextLine();
                     PhoneBookEntry entry = new PhoneBookEntry(id, firstName, lastName, email, zipCode, phoneNumber);
                     
-                    // Adding the entry to the directory
-                    if (phoneBookDirectory.addEntry(entry).equals("Successful")) {
-                        
-                    	System.out.println("Entry added successfully.");
+                    addPhoneEntry(entry);
                     
-                    } else {
-                        
-                    	System.out.println("Failed to add entry. Directory might be full.");
-                    }
                     break;
 
                 case 2:
@@ -132,48 +149,44 @@ public class NormalUser extends User implements NormalUserInterface {
                     firstName = scanner.nextLine();
                     System.out.print("Enter Last Name of Entry to Edit: ");
                     lastName = scanner.nextLine();
-                    if (phoneBookDirectory.Edit(firstName, lastName, scanner).equals("Edited Successfully")) {
-                        
-                    	System.out.println("Entry edited successfully.");
                     
-                    } else {
-                        
-                    	System.out.println("Entry not found.");
-                    }
+                    editPhoneEntry(firstName, lastName, scanner);
+                    
                     break;
 
                 case 3:
+                	
                 	// Sort the phone book directory
-                    phoneBookDirectory.sortEntriesById();
-                    System.out.println("PhoneBookDirectory sorted by ID.");
-                    break;
+                	sortPhoneBookDirectory();
+                    
+                	break;
 
                 case 4:
+                	
                 	// Search for a phone number
                     System.out.print("Enter Phone Number to Search: ");
                     phoneNumber = scanner.nextLine();
-                    String searchResult = phoneBookDirectory.LinearSearchByPhoneNumber(phoneNumber);
-                    if (searchResult.equals("Phone Number Found")) {
-                        
-                    	System.out.println("Phone number found.");
                     
-                    } else {
-                        
-                    	System.out.println("Phone number not found.");
-                    }
+                    searchLinear(phoneNumber);
+                    
                     break;
 
                 case 5:
+                	
                 	// Print the user's information
-                    printUserInfo();
-                    break;
+                	printUserInfo();
+                    
+                	break;
 
                 case 6:
+                	
                 	// Exit the menu
                     System.out.println("Exiting Normal User Menu...");
+                    
                     break;
 
                 default:
+                	
                 	// Invalid choice handling
                     System.out.println("Invalid choice. Please try again.");
             }
