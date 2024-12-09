@@ -49,27 +49,17 @@ public class PhoneBookDirectory {
     
     // Method to search for an entry by ID using binary search
     public PhoneBookEntry SearchbyIdBinarySearch(int id) {
-    	
-        int low = 0;
-        int high = count - 1;
-        
-        // Perform binary search
-        while (high >= low) {
-            int mid = (low + high) / 2;
-            if (entries[mid].getId() < id) {
-            	high = mid - 1;
-            }
-            else if (entries[mid].getId() == id) {
-            	
-            	// Return the entry if found
-            	return entries[mid];
-            }
-            else {
-            	low = mid + 1;
+        int left = 0, right = count - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (entries[mid].getId() == id) {
+                return entries[mid];
+            } else if (entries[mid].getId() < id) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
         }
-        
-        // Return empty entry if not found
         return new PhoneBookEntry();
     }
     
