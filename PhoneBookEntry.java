@@ -1,13 +1,15 @@
-// Exercise 1
-public class PhoneBookEntry {
 
+public class PhoneBookEntry {
+	
+	// Fields to store the phone book entry details
 	private int id;
 	private String firstname;
 	private String lastname;
 	private String email;
 	private int zipcode;
-	private int phonenumber;
+	private String phonenumber;
 	
+	// Default constructor initializing fields with default values
 	public PhoneBookEntry() {
 		
 		id = -1;
@@ -15,10 +17,23 @@ public class PhoneBookEntry {
 		lastname = "";
 		email = "";
 		zipcode = -1;
-		phonenumber = -1;
+		phonenumber = "";
 	}
 	
-	public PhoneBookEntry(int id1, String firstname1, String lastname1, String email1, int zipcode1, int phonenumber1) {
+	// Constructor initializing all fields except ID
+	public PhoneBookEntry(String firstname0, String lastname0, String email0, int zipcode0, String phonenumber0) {
+		
+		// Default ID
+		id = -1; 
+		firstname = firstname0;
+		lastname = lastname0;
+		email = email0;
+		zipcode = zipcode0;
+		phonenumber = phonenumber0;
+		}
+	
+	// Constructor initializing all fields including ID
+	public PhoneBookEntry(int id1, String firstname1, String lastname1, String email1, int zipcode1, String phonenumber1) {
 		
 		id = id1;
 		firstname = firstname1;
@@ -29,21 +44,25 @@ public class PhoneBookEntry {
 		
 	}
 	
-	public PhoneBookEntry(String firstname2, int phonenumber2) {
+	// Constructor initializing first name and phone number only
+	public PhoneBookEntry(String firstname2, String phonenumber2) {
 		
 		firstname = firstname2;
 		phonenumber = phonenumber2;
 	}
 	
+	// Constructor initializing only the first name
 	public PhoneBookEntry(String firstname3) {
 		
 		firstname = firstname3;
 	}
 	
+	// Getter and Setters Below
+	
 	public int getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -80,14 +99,15 @@ public class PhoneBookEntry {
 		this.zipcode = zipcode;
 	}
 
-	public int getPhonenumber() {
+	public String getPhonenumber() {
 		return phonenumber;
 	}
 
-	public void setPhonenumber(int phonenumber) {
+	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
 	}
-
+	
+	// Method to print all details of the phone book entry
 	public void printBookEntry() {
 			
 		System.out.println("ID: " + id);
